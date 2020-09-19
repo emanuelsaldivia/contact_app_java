@@ -1,3 +1,4 @@
+include ':contacts-model'
 include ':contacts-repository'
 include ':app'
 rootProject.name = "Contacts App"

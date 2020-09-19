@@ -2,7 +2,9 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="contacs-model" target="1.7" />
       <module name="contacts-model" target="1.7" />
+      <module name="contacts-network" target="1.7" />
       <module name="contacts-repository" target="1.7" />
     </bytecodeTargetLevel>
   </component>
