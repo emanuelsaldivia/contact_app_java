@@ -16,6 +16,7 @@ import com.esaldivia.contactsapp.model.entities.ContactOutputs;
 import com.esaldivia.contactsapp.viewModel.ViewModelContactOutputs;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,12 +40,23 @@ public class MainActivity extends AppCompatActivity {
         viewModelContactOutputs = ViewModelProviders.of(this).get(ViewModelContactOutputs.class);
         viewModelContactOutputs = new ViewModelContactOutputs(this.getApplication());
         viewModelContactOutputs.getContactRepository().observe(this, contactResponse -> {
-            mContacts = contactResponse;
+            List<Contact> favContacts = new ArrayList<>();
+            List<Contact> otherContacts = new ArrayList<>();
+            for (Contact contact : contactResponse) {
+                if (contact.isFavorite()) {
+                    favContacts.add(contact);
+                } else {
+                    otherContacts.add(contact);
+                }
+            }
+            Comparator<Contact> nameComparator = (o1, o2) -> o1.getName().compareTo(o2.getName());
+            favContacts.sort(nameComparator);
+            otherContacts.sort(nameComparator);
+            mContacts.addAll(favContacts);
+            mContacts.addAll(otherContacts);
             setupRecyclerView();
-//            listOfContacts.addAll(mContacts); todo
             mAdapter.notifyDataSetChanged();
         });
-//        setupRecyclerView();
 
     }
 
