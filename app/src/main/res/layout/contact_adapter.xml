@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_toRightOf="@id/contact_image"
             android:layout_gravity="center"
             android:layout_weight="1">
 
@@ -62,5 +63,5 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
