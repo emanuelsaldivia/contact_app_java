@@ -1,6 +1,6 @@
-package com.esaldivia.contacts_model.entities;
+package com.esaldivia.contactsapp.model.entities;
 
-import com.esaldivia.contacts_model.interfaces.PhoneInterface;
+import com.esaldivia.contactsapp.model.interfaces.PhoneInterface;
 
 public class Phone implements PhoneInterface {
     protected Integer phoneNumber;

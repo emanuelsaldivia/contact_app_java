@@ -1,4 +1,4 @@
-package com.esaldivia.contacts_model.interfaces;
+package com.esaldivia.contactsapp.model.interfaces;
 
 public interface PhoneInterface {
     Integer getPhoneNumber();

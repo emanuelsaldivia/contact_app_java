@@ -1,3 +1,4 @@
+include ':contacts-network'
 include ':contacts-model'
 include ':contacts-repository'
 include ':app'

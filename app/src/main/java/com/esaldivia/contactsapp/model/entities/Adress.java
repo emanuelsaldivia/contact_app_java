@@ -1,4 +1,4 @@
-package com.esaldivia.contacts_model.entities;
+package com.esaldivia.contactsapp.model.entities;
 
 public class Adress {
     private String country;
