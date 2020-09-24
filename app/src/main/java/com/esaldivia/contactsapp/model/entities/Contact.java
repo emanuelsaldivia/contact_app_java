@@ -2,10 +2,11 @@ package com.esaldivia.contactsapp.model.entities;
 
 import com.esaldivia.contactsapp.model.interfaces.PhoneInterface;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Contact {
+public class Contact implements Serializable {
     private Integer id;
     private String name;
     private String companyName;

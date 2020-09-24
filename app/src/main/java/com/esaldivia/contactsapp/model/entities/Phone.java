@@ -2,7 +2,9 @@ package com.esaldivia.contactsapp.model.entities;
 
 import com.esaldivia.contactsapp.model.interfaces.PhoneInterface;
 
-public class Phone implements PhoneInterface {
+import java.io.Serializable;
+
+public class Phone implements Serializable, PhoneInterface {
     protected Integer phoneNumber;
 
     @Override

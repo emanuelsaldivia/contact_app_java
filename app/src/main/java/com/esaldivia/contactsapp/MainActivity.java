@@ -13,6 +13,7 @@ import com.esaldivia.contactsapp.adapters.ContactAdapter;
 import com.esaldivia.contactsapp.databinding.ActivityMainBinding;
 import com.esaldivia.contactsapp.model.entities.Contact;
 import com.esaldivia.contactsapp.model.entities.ContactOutputs;
+import com.esaldivia.contactsapp.viewModel.MainActivityViewModel;
 import com.esaldivia.contactsapp.viewModel.ViewModelContactOutputs;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     List<Contact> mContacts = new ArrayList<>();
     RecyclerView recyclerView;
     ContactAdapter mAdapter;
+    MainActivityViewModel mainActivityViewModel;
     ViewModelContactOutputs viewModelContactOutputs;
     ActivityMainBinding binding;
 
@@ -37,12 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = binding.customRecyclerView;
 
-        viewModelContactOutputs = ViewModelProviders.of(this).get(ViewModelContactOutputs.class);
-        viewModelContactOutputs = new ViewModelContactOutputs(this.getApplication());
-        viewModelContactOutputs.getContactRepository().observe(this, contactResponse -> {
+        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        mainActivityViewModel.getContactList().observe(this, contacts -> {
             List<Contact> favContacts = new ArrayList<>();
             List<Contact> otherContacts = new ArrayList<>();
-            for (Contact contact : contactResponse) {
+            for (Contact contact : contacts) {
                 if (contact.isFavorite()) {
                     favContacts.add(contact);
                 } else {
@@ -58,6 +59,27 @@ public class MainActivity extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
         });
 
+//        viewModelContactOutputs = ViewModelProviders.of(this).get(ViewModelContactOutputs.class);
+//        viewModelContactOutputs = new ViewModelContactOutputs(this.getApplication());
+//        viewModelContactOutputs.getContactRepository().observe(this, contactResponse -> {
+//            List<Contact> favContacts = new ArrayList<>();
+//            List<Contact> otherContacts = new ArrayList<>();
+//            for (Contact contact : contactResponse) {
+//                if (contact.isFavorite()) {
+//                    favContacts.add(contact);
+//                } else {
+//                    otherContacts.add(contact);
+//                }
+//            }
+//            Comparator<Contact> nameComparator = (o1, o2) -> o1.getName().compareTo(o2.getName());
+//            favContacts.sort(nameComparator);
+//            otherContacts.sort(nameComparator);
+//            mContacts.addAll(favContacts);
+//            mContacts.addAll(otherContacts);
+//            setupRecyclerView();
+//            mAdapter.notifyDataSetChanged();
+//        });
+        setupRecyclerView();
     }
 
     private void setupRecyclerView() {

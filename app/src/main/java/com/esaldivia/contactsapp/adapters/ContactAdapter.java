@@ -1,6 +1,8 @@
 package com.esaldivia.contactsapp.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.esaldivia.contactsapp.ContactInformationActivity;
 import com.esaldivia.contactsapp.R;
 import com.esaldivia.contactsapp.databinding.ContactAdapterBinding;
 import com.esaldivia.contactsapp.model.entities.Contact;
@@ -56,6 +59,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         holder.getUserIsFavoriteView().setImageDrawable(isfavorite ?
                         context.getDrawable(R.drawable.favorite_true) :
                         context.getDrawable(R.drawable.favorite_false));
+
+        holder.getView().setOnClickListener((view) ->{
+            Intent intent = new Intent(context, ContactInformationActivity.class);
+            intent.putExtra(ContactInformationActivity.CONTACT_KEY, contact);
+            Activity activity = (Activity) context;
+            activity.startActivityForResult(intent, 1);
+        });
 
     }
 
