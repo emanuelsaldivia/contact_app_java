@@ -37,30 +37,42 @@ public class MainActivity extends AppCompatActivity {
 
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         mainActivityViewModel.init();
-        mainActivityViewModel.getContactList().observe(this, contacts -> {
-            List<Contact> favContacts = new ArrayList<>();
-            List<Contact> otherContacts = new ArrayList<>();
-            for (Contact contact : contacts) {
-                if (contact.isFavorite()) {
-                    favContacts.add(contact);
-                } else {
-                    otherContacts.add(contact);
-                }
-            }
-            Comparator<Contact> nameComparator = (o1, o2) -> o1.getName().compareTo(o2.getName());
-            favContacts.sort(nameComparator);
-            otherContacts.sort(nameComparator);
-            mContacts.addAll(favContacts);
-            mContacts.addAll(otherContacts);
-            setupRecyclerView();
-            mAdapter.notifyDataSetChanged();
-        });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mainActivityViewModel.getContactList().observe(this, contacts -> {
+            sortContacts(contacts);
+        });
+    }
+
+    // todo no ordenar aca adentro
+    private void sortContacts(List<Contact> contacts) {
+        mContacts.clear();
+        List<Contact> favContacts = new ArrayList<>();
+        List<Contact> otherContacts = new ArrayList<>();
+        for (Contact contact : contacts) {
+            if (contact.isFavorite()) {
+                favContacts.add(contact);
+            } else {
+                otherContacts.add(contact);
+            }
+        }
+        Comparator<Contact> nameComparator = (o1, o2) -> o1.getName().compareTo(o2.getName());
+        favContacts.sort(nameComparator);
+        otherContacts.sort(nameComparator);
+        mContacts.addAll(favContacts);
+        mContacts.addAll(otherContacts);
+        setupRecyclerView();
+        mAdapter.notifyDataSetChanged();
     }
 
     private void setupRecyclerView() {
         if (mAdapter == null) {
-            mAdapter = new ContactAdapter(mainActivityViewModel.getContactList().getValue(), MainActivity.this);
+            mAdapter = new ContactAdapter(mContacts, MainActivity.this);
+//            mAdapter = new ContactAdapter(mainActivityViewModel.getContactList().getValue(), MainActivity.this);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(mAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
