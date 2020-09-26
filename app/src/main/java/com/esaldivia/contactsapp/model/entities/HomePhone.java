@@ -1,15 +1,13 @@
 package com.esaldivia.contactsapp.model.entities;
 
 import com.esaldivia.contactsapp.model.interfaces.ContactInfo;
-import com.esaldivia.contactsapp.model.interfaces.PhoneInterface;
 
-public class WorkPhone implements ContactInfo {
-    protected String phoneNumber;
+public class HomePhone implements ContactInfo {
+    private String phoneNumber;
 
-    public WorkPhone(String phoneNumber) {
+    public HomePhone(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 
     @Override
     public String getName() {
@@ -23,6 +21,6 @@ public class WorkPhone implements ContactInfo {
 
     @Override
     public String getType() {
-        return "Work";
+        return "Home";
     }
 }

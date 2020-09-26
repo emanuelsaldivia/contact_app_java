@@ -1,12 +1,12 @@
 package com.esaldivia.contactsapp.model.entities;
 
 import com.esaldivia.contactsapp.model.interfaces.ContactInfo;
-import com.esaldivia.contactsapp.model.interfaces.PhoneInterface;
 
-public class WorkPhone implements ContactInfo {
-    protected String phoneNumber;
+public class MobilePhone implements ContactInfo {
 
-    public WorkPhone(String phoneNumber) {
+    private String phoneNumber;
+
+    public MobilePhone(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -23,6 +23,6 @@ public class WorkPhone implements ContactInfo {
 
     @Override
     public String getType() {
-        return "Work";
+        return "Mobile";
     }
 }

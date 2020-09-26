@@ -1,8 +1,11 @@
 package com.esaldivia.contactsapp.model.entities;
 
+import com.esaldivia.contactsapp.Utils.Util_Date;
+import com.esaldivia.contactsapp.model.interfaces.ContactInfo;
 import com.esaldivia.contactsapp.model.interfaces.PhoneInterface;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,10 +16,11 @@ public class Contact implements Serializable {
     private boolean isFavorite;
     private String smallImageURL;
     private String largeImageURL;
-    private String emailAdress;
+    private String emailAddress;
     private Date birthdate;
     private List<PhoneInterface> phoneNumbers;
-    private Adress adress;
+    private Phone phone;
+    private Address address;
 
     public Integer getId() {
         return id;
@@ -42,8 +46,8 @@ public class Contact implements Serializable {
         return largeImageURL;
     }
 
-    public String getEmailAdress() {
-        return emailAdress;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     public Date getBirthdate() {
@@ -54,7 +58,30 @@ public class Contact implements Serializable {
         return phoneNumbers;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAddress() {
+        return address;
+    }
+
+    // todo esta logica no va aca
+    public List<ContactInfo> getContactInfo() {
+
+        List<ContactInfo> info = new ArrayList<>(phone.getPhoneNumers());
+        info.add(getAddress());
+
+        if (getBirthdate() != null) {
+            AdditionalInformation birthdate = new AdditionalInformation("BIRTHDATE:", Util_Date.dateToString(getBirthdate()), null);
+            info.add(birthdate);
+        }
+
+        if (getEmailAddress() != null) {
+            AdditionalInformation email = new AdditionalInformation("EMAIL:", getEmailAddress(), null);
+            info.add(email);
+        }
+
+        return info;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }

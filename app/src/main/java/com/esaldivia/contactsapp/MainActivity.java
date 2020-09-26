@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.esaldivia.contactsapp.adapters.ContactAdapter;
+import com.esaldivia.contactsapp.adapters.SimpleSectionedRecyclerViewAdapter;
 import com.esaldivia.contactsapp.databinding.ActivityMainBinding;
 import com.esaldivia.contactsapp.model.entities.Contact;
 import com.esaldivia.contactsapp.viewModel.MainActivityViewModel;
@@ -20,11 +21,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Contact> mContacts = new ArrayList<>();
-    RecyclerView recyclerView;
-    ContactAdapter mAdapter;
-    MainActivityViewModel mainActivityViewModel;
-    ActivityMainBinding binding;
+    private List<Contact> mContacts = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private ContactAdapter mAdapter;
+    private SimpleSectionedRecyclerViewAdapter mSectionedAdapter;
+    private List<SimpleSectionedRecyclerViewAdapter.Section> sections;
+    private MainActivityViewModel mainActivityViewModel;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         recyclerView = binding.customRecyclerView;
+
+        sections = new ArrayList<>();
 
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         mainActivityViewModel.init();
@@ -48,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // todo no ordenar aca adentro
     private void sortContacts(List<Contact> contacts) {
         mContacts.clear();
         List<Contact> favContacts = new ArrayList<>();
@@ -65,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
         otherContacts.sort(nameComparator);
         mContacts.addAll(favContacts);
         mContacts.addAll(otherContacts);
+
+        sections.clear();
+        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(0,getString(R.string.favorite_contacts)));
+        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(favContacts.size(),getString(R.string.other_contacts)));
+
         setupRecyclerView();
         mAdapter.notifyDataSetChanged();
     }
@@ -72,14 +81,25 @@ public class MainActivity extends AppCompatActivity {
     private void setupRecyclerView() {
         if (mAdapter == null) {
             mAdapter = new ContactAdapter(mContacts, MainActivity.this);
-//            mAdapter = new ContactAdapter(mainActivityViewModel.getContactList().getValue(), MainActivity.this);
+            mSectionedAdapter = new SimpleSectionedRecyclerViewAdapter(this,R.layout.section,R.id.section_text,mAdapter);
+
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(mAdapter);
+
+            setupRecyclerViewSections();
+            recyclerView.setAdapter(mSectionedAdapter);
+
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setNestedScrollingEnabled(true);
         } else {
+            setupRecyclerViewSections();
+            mSectionedAdapter.notifyDataSetChanged();
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    private void setupRecyclerViewSections() {
+        SimpleSectionedRecyclerViewAdapter.Section[] dummy = new SimpleSectionedRecyclerViewAdapter.Section[sections.size()];
+        mSectionedAdapter.setSections(sections.toArray(dummy));
     }
 
 }
