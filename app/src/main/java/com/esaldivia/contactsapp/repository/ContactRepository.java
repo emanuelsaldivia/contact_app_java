@@ -14,8 +14,11 @@ public class ContactRepository {
     private static ContactRepository contactRepository;
     private static NetworkService networkService;
     private final MutableLiveData<List<Contact>> listOfContacts = new MutableLiveData<>();
-//    private final MutableLiveData<ContactOutputs> listOfContacts = new MutableLiveData<>();
 
+    /**
+     * Retrieves ContactRepository instance
+     * @return
+     */
     public static ContactRepository getInstance() {
         if (contactRepository == null) {
             contactRepository = new ContactRepository();
@@ -27,6 +30,9 @@ public class ContactRepository {
         networkService = RetrofitClientInstance.getRetrofitInstance().create(NetworkService.class);
     }
 
+    /**
+     * Retrieves contact list from API
+     */
     public MutableLiveData<List<Contact>> getContacts() {
         Call<List<Contact>> contactList = networkService.getAllContacts();
         contactList.enqueue(new Callback<List<Contact>>() {
@@ -41,6 +47,22 @@ public class ContactRepository {
         });
 
         return listOfContacts;
+    }
+
+    /**
+     * updates contacts from list (ideally ORM takes care of this)
+     * @param contact
+     */
+    public void updateContact(Contact contact) {
+        List<Contact> contacts = listOfContacts.getValue();
+
+        for (int i = 0; i < contacts.size(); i++) {
+            Contact c = contacts.get(i);
+            if (contact.getId().equals(c.getId())) {
+                contacts.set(i, contact);
+                break;
+            }
+        }
     }
 
 }
