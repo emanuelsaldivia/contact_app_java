@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Contacts App</string>
+    <string name="app_name">Contacts</string>
+    <string name="favorite">Favorite</string>
 </resources>
