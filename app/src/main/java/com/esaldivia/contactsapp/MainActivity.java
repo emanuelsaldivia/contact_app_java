@@ -41,13 +41,17 @@ public class MainActivity extends AppCompatActivity {
         sections = new ArrayList<>();
 
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
-        mainActivityViewModel.init();
+        mainActivityViewModel.init(this);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        mainActivityViewModel.getIsUpdating().observe(this, mIsUpdating -> {
+            binding.progressCircular.setVisibility(mIsUpdating ? View.VISIBLE : View.GONE);
+        });
+
         mainActivityViewModel.getContactList().observe(this, contacts -> {
             sortContacts(contacts);
         });
