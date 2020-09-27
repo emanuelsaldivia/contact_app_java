@@ -109,7 +109,7 @@ public class ContactInformationActivity extends AppCompatActivity {
 
     private void setupRecyclerView(Contact contact) {
         if (mAdapter == null) {
-            mAdapter = new ContactInfoAdapter(contact.getContactInfo());
+            mAdapter = new ContactInfoAdapter(contact.getContactInfo(this));
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(mAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
