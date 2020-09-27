@@ -3,4 +3,6 @@
     <string name="favorite">Favorite</string>
     <string name="favorite_contacts">FAVORITE CONTACTS</string>
     <string name="other_contacts">OTHER CONTACTS</string>
+    <string name="birthdate">BIRTHDATE:</string>
+    <string name="email">EMAIL:</string>
 </resources>

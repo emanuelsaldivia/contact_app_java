@@ -12,20 +12,6 @@ public class Phone implements Serializable {
     private String home;
     private String mobile;
 
-    private WorkPhone workPhone;
-
-    public String getWork() {
-        return work;
-    }
-
-    public String getHome() {
-        return home;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
     public WorkPhone getWorkPhone() {
         return new WorkPhone(work);
     }
@@ -38,7 +24,10 @@ public class Phone implements Serializable {
         return new MobilePhone(mobile);
     }
 
-    // todo esta logica no va aca
+    /**
+     * Retrieves a list o phone numbers ready to show
+     * @return
+     */
     public List<ContactInfo> getPhoneNumers() {
         List<ContactInfo> phoneNumbers = new ArrayList<>();
 

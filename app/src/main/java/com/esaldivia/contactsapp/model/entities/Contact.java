@@ -1,5 +1,8 @@
 package com.esaldivia.contactsapp.model.entities;
 
+import android.content.Context;
+
+import com.esaldivia.contactsapp.R;
 import com.esaldivia.contactsapp.Utils.Util_Date;
 import com.esaldivia.contactsapp.model.interfaces.ContactInfo;
 import com.esaldivia.contactsapp.model.interfaces.PhoneInterface;
@@ -62,19 +65,18 @@ public class Contact implements Serializable {
         return address;
     }
 
-    // todo esta logica no va aca
-    public List<ContactInfo> getContactInfo() {
+    public List<ContactInfo> getContactInfo(Context context) {
 
         List<ContactInfo> info = new ArrayList<>(phone.getPhoneNumers());
         info.add(getAddress());
 
         if (getBirthdate() != null) {
-            AdditionalInformation birthdate = new AdditionalInformation("BIRTHDATE:", Util_Date.dateToString(getBirthdate()), null);
+            AdditionalInformation birthdate = new AdditionalInformation(context.getString(R.string.birthdate), Util_Date.dateToString(getBirthdate()), null);
             info.add(birthdate);
         }
 
         if (getEmailAddress() != null) {
-            AdditionalInformation email = new AdditionalInformation("EMAIL:", getEmailAddress(), null);
+            AdditionalInformation email = new AdditionalInformation(context.getString(R.string.email), getEmailAddress(), null);
             info.add(email);
         }
 
