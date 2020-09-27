@@ -20,7 +20,6 @@ public class SimpleSectionedRecyclerViewAdapter  extends RecyclerView.Adapter<Re
     private boolean mValid = true;
     private int mSectionResourceId;
     private int mTextResourceId;
-    private LayoutInflater mLayoutInflater;
     private RecyclerView.Adapter mBaseAdapter;
     private SparseArray<Section> mSections = new SparseArray<Section>();
 
@@ -28,7 +27,6 @@ public class SimpleSectionedRecyclerViewAdapter  extends RecyclerView.Adapter<Re
     public SimpleSectionedRecyclerViewAdapter(Context context, int sectionResourceId, int textResourceId,
                                               RecyclerView.Adapter baseAdapter) {
 
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mSectionResourceId = sectionResourceId;
         mTextResourceId = textResourceId;
         mBaseAdapter = baseAdapter;

@@ -1,6 +1,5 @@
 package com.esaldivia.contactsapp.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.esaldivia.contactsapp.databinding.ContactAdapterBinding;
 import com.esaldivia.contactsapp.model.interfaces.ContactInfo;
 
 import java.util.List;

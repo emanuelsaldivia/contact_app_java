@@ -1,7 +1,6 @@
 package com.esaldivia.contactsapp.model.entities;
 
 import com.esaldivia.contactsapp.model.interfaces.ContactInfo;
-import com.esaldivia.contactsapp.model.interfaces.PhoneInterface;
 
 public class WorkPhone implements ContactInfo {
     protected String phoneNumber;

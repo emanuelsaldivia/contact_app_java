@@ -7,7 +7,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.esaldivia.contactsapp.databinding.ActivityMainBinding;
 import com.esaldivia.contactsapp.databinding.ContactAdapterBinding;
 
 public class ContactViewHolder extends RecyclerView.ViewHolder {

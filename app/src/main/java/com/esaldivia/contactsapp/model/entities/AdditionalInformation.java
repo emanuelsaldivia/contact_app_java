@@ -3,9 +3,9 @@ package com.esaldivia.contactsapp.model.entities;
 import com.esaldivia.contactsapp.model.interfaces.ContactInfo;
 
 public class AdditionalInformation implements ContactInfo {
-    String name;
-    String value;
-    String type;
+    private String name;
+    private String value;
+    private String type;
 
     public AdditionalInformation(String name, String value, String type) {
         this.name = name;

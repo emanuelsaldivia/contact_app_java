@@ -7,11 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.esaldivia.contactsapp.databinding.ContactInfoAdapterBinding;
-import com.esaldivia.contactsapp.model.entities.Contact;
 
 public class ContactInfoViewHolder extends RecyclerView.ViewHolder {
 
-    ContactInfoAdapterBinding contactInfoAdapterBinding;
+    private ContactInfoAdapterBinding contactInfoAdapterBinding;
+
     public ContactInfoViewHolder(@NonNull View itemView) {
         super(itemView);
         contactInfoAdapterBinding = ContactInfoAdapterBinding.bind(itemView);
